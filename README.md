@@ -24,11 +24,7 @@ No auth (unless you want it now!), no storage, no nothing. Just a simple file up
 |--------------|----------------------------|---------|----------|
 | PORT         | Server port                | 3000    | No       |
 | MAX_FILE_SIZE| Maximum file size in MB    | 1024    | No       |
-
-# Future Features
-- Camera Upload for Mobile
-- Enhanced Progress Features (upload speed display, time remaining estimation)
-
+| UPLOAD_DIR   | Directory to store uploads | ./uploads | No       |
 
 ## Quick Start
 
@@ -43,6 +39,7 @@ npm install
 ```env
 PORT=3000                  # Port to run the server on
 MAX_FILE_SIZE=1024        # Maximum file size in MB (default: 1024 MB / 1 GB)
+UPLOAD_DIR=/uploads        # Directory to store uploads
 ```
 
 3. Start the server:
