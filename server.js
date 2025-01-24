@@ -162,3 +162,20 @@ app.listen(port, () => {
         log.error(`Failed to list directory contents: ${err.message}`);
     }
 });
+
+// Handle graceful shutdown
+process.on('SIGINT', () => {
+    log.info('Received SIGINT signal. Cleaning up...');
+
+    // Close any active uploads
+    uploads.forEach((upload, uploadId) => {
+        upload.writeStream.end();
+        fs.unlink(upload.filePath, (err) => {
+            if (err) log.error(`Failed to delete incomplete upload during shutdown: ${err.message}`);
+        });
+        uploads.delete(uploadId);
+    });
+
+    log.info('Shutdown complete');
+    process.exit(0);
+});
