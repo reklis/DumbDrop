@@ -59,10 +59,10 @@ docker pull ghcr.io/reklis/dumbdrop:latest
 
 # Run the container
 # For Linux/Mac:
-docker run -p 3000:3000 -v $(pwd)/local_uploads:/uploads ghcr.io/reklis/dumbdrop:latest
+docker run -p 3000:3000 -v $(pwd)/local_uploads:/uploads -e UPLOAD_DIR=/uploads ghcr.io/reklis/dumbdrop:latest
 
 # For Windows PowerShell:
-docker run -p 3000:3000 -v "${PWD}\local_uploads:/uploads" ghcr.io/reklis/dumbdrop:latest
+docker run -p 3000:3000 -v "${PWD}\local_uploads:/uploads" -e UPLOAD_DIR=/uploads ghcr.io/reklis/dumbdrop:latest
 ```
 
 #### Build Locally

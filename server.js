@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
-const uploadDir = './uploads';  // Local development
+const uploadDir = process.env.UPLOAD_DIR || './uploads';
 const maxFileSize = parseInt(process.env.MAX_FILE_SIZE || '1024') * 1024 * 1024; // Convert MB to bytes
 
 // Logging helper
