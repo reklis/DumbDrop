@@ -77,7 +77,7 @@ app.post('/upload/init', async (req, res) => {
             filePath,
             fileSize,
             bytesReceived: 0,
-            writeStream: fs.createWriteStream(filePath)
+            writeStream: fs.createWriteStream(filePath, { mode: 0o777 })
         });
 
         log.info(`Initialized upload for ${filename} (${fileSize} bytes)`);
