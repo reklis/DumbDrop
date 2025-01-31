@@ -77,7 +77,7 @@ app.post('/upload/init', async (req, res) => {
             filePath,
             fileSize,
             bytesReceived: 0,
-            writeStream: fs.createWriteStream(filePath, { mode: 0o777 })
+            writeStream: fs.createWriteStream(filePath)
         });
 
         log.info(`Initialized upload for ${filename} (${fileSize} bytes)`);
@@ -115,6 +115,9 @@ app.post('/upload/chunk/:uploadId', express.raw({
         // Check if upload is complete
         if (upload.bytesReceived >= upload.fileSize) {
             upload.writeStream.end();
+            fs.chmod(upload.filePath, 0o777, (err) => {
+                if (err) log.error(`Failed to set file permissions: ${err.message}`);
+            });
             uploads.delete(uploadId);
             log.success(`Upload completed: ${upload.filename}`);
         }
